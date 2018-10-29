@@ -4,4 +4,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+    <ion-refresher  (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content>
+          Test
+        </ion-refresher-content>
+      </ion-refresher>
+</ion-content>

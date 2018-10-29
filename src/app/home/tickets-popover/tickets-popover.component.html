@@ -1,0 +1,23 @@
+<ion-toolbar>
+    <ion-title>List options</ion-title>
+    <ion-buttons slot="primary">
+        <ion-button (click)="saveTicketSettings()" color="secondary">
+          <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+</ion-toolbar>
+<form [formGroup]="optionsForm">
+    <ion-list>
+        <ion-item>
+          <ion-label>Show search bar</ion-label>
+          <ion-toggle formControlName="showSearchBar"></ion-toggle>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label>Show detailed view</ion-label>
+          <ion-toggle formControlName="showDetailed" ></ion-toggle>
+        </ion-item>
+      
+      </ion-list>
+</form>
+{{optionsForm.value | json}}

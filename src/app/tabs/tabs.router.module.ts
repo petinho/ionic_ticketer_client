@@ -5,6 +5,7 @@ import { TabsPage } from './tabs.page';
 import { HomePage } from '../home/home.page';
 import { AboutPage } from '../about/about.page';
 import { MapViewerPage } from '../map-viewer/map-viewer.page';
+import { TicketEditorComponent } from '../home/ticket-editor/ticket-editor/ticket-editor.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,11 @@ const routes: Routes = [
         path: 'home',
         outlet: 'home',
         component: HomePage
+      },
+      {
+        path: 'edit/:id',
+        outlet: 'home',
+        component: TicketEditorComponent
       },
       {
         path: 'about',

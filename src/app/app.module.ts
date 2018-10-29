@@ -1,5 +1,6 @@
 import { InMemoryDataService } from './services/in-memory-data.service';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule }    from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,6 +20,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule, 
+    ReactiveFormsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,

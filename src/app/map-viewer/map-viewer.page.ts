@@ -1,4 +1,4 @@
-import { Platform } from '@ionic/angular';
+import { Platform, ToastController, LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import {
   GoogleMaps,
@@ -25,7 +25,10 @@ import {
 export class MapViewerPage implements OnInit {
 
   map: GoogleMap;
-  constructor(private platform: Platform) { }
+  loading: any;
+  constructor(private platform: Platform,
+    public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController) { }
 
   async ngOnInit() {
     // Since ngOnInit() is executed before `deviceready` event,
@@ -46,7 +49,59 @@ export class MapViewerPage implements OnInit {
         tilt: 30
       }
     });
+   
+  }
 
+  async onButtonClick(){
+    this.map.clear();
+
+    this.loading = await this.loadingCtrl.create({
+      message: 'Loading'
+    });
+    await this.loading.present();
+
+    // Get the location of you
+    this.map.getMyLocation().then((location: MyLocation) => {
+      this.loading.dismiss();
+      console.log(JSON.stringify(location, null ,2));
+
+      // Move the map camera to the location with animation
+      this.map.animateCamera({
+        target: location.latLng,
+        zoom: 17,
+        tilt: 30
+      });
+
+      // add a marker
+      let marker: Marker = this.map.addMarkerSync({
+        title: '@ionic-native/google-maps plugin!',
+        snippet: 'This plugin is awesome!',
+        position: location.latLng,
+        animation: GoogleMapsAnimation.BOUNCE
+      });
+
+      // show the infoWindow
+      marker.showInfoWindow();
+
+      // If clicked it, display the alert
+      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+        this.showToast('clicked!');
+      });
+    })
+    .catch(err => {
+      this.loading.dismiss();
+      this.showToast(err.error_message);
+    });
+  }
+
+  async showToast(message: string) {
+    let toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      position: 'middle'
+    });
+
+    toast.present();
   }
 
 }

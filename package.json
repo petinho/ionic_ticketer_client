@@ -29,13 +29,14 @@
     "cordova-android": "7.0.0",
     "cordova-browser": "5.0.4",
     "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-googlemaps": "^2.4.6",
+    "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git#multiple_maps",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^2.2.0",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "core-js": "^2.5.3",
+    "node-sass": "^4.9.4",
     "rxjs": "6.2.2",
     "zone.js": "^0.8.26"
   },
@@ -77,7 +78,7 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-googlemaps": {
-        "API_KEY_FOR_ANDROID": "",
+        "API_KEY_FOR_ANDROID": "AIzaSyBA3NjVs650rG5dgq--o7PKRizQi_7uAzM",
         "PLAY_SERVICES_VERSION": "15.0.1",
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       }

@@ -1,10 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Ticket Pool</ion-title>
+    <ion-buttons slot="primary">
+        <ion-button (click)="presentTicketPopover($event)" color="secondary">
+          <ion-icon slot="icon-only" name="more"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+  <ion-refresher  (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content>          
+        </ion-refresher-content>
+  </ion-refresher>
+  <!-- <ion-button href="tabs/(home:edit)">Next</ion-button>
+  <ion-button [routerLink]="['../edit']" routerLinkActive="router-link-active" >Next Routerlink</ion-button> -->
+  <ion-card (dblclick)="presentActionSheet(ticket.Id)" *ngFor="let ticket of currentTickets">
+      <ion-item>
+          <ion-icon name="hammer" slot="start"></ion-icon>
+          <ion-label>{{ticket.Title}}</ion-label>
+          <ion-button (click)="presentActionSheet(ticket.Id)" fill="outline" slot="end">View</ion-button>
+        </ion-item>
+    <ion-card-content>
+      <ion-icon class="card-body-icon" name="warning"></ion-icon>
+      <div>{{ticket.Description}}</div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
