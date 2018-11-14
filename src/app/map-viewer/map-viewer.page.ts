@@ -26,6 +26,7 @@ export class MapViewerPage implements OnInit {
 
   map: GoogleMap;
   loading: any;
+  persLocation: LatLng;
   constructor(private platform: Platform,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController) { }
@@ -35,21 +36,40 @@ export class MapViewerPage implements OnInit {
     // you have to wait the event.
     
     await this.platform.ready();
-    await this.loadMap();
+    
+    LocationService.getMyLocation().then((myLocation: MyLocation)=>{
+      const options: GoogleMapOptions = {
+        camera: {
+          target: myLocation.latLng
+        },
+        zoom: 20,
+        //tilt: 30
+      }
+      this.persLocation = myLocation.latLng;
+      this.loadMap(options);
+    });
   }
 
-  loadMap() {
-    this.map = GoogleMaps.create('map_canvas', {
+  loadMap(options: GoogleMapOptions) {
+    let mapOptions: GoogleMapOptions = {
       camera: {
         target: {
-          lat: 43.0741704,
-          lng: -89.3809802
+          lat: this.persLocation.lat,
+          lng: this.persLocation.lng
         },
-        zoom: 18,
+        zoom: 17,
         tilt: 30
       }
-    });
+    };
+
+    this.map = GoogleMaps.create('map_canvas', mapOptions);
    
+    let marker: Marker = this.map.addMarkerSync({
+      title: 'Alberto',
+      //icon: 'assets/imgs/AMarkerMini.png',
+      animation: 'DROP',
+      position: this.persLocation
+    });
   }
 
   async onButtonClick(){

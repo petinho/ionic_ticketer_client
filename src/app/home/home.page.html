@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Ticket Pool</ion-title>
+    <!-- <ion-title>Ticket Pool</ion-title> -->
+    <form *ngIf="showSearchBar" [formGroup]="searchForm">
+        <ion-searchbar formControlName="searchControl" placeholder="Ticket pool"></ion-searchbar>
+    </form>    
     <ion-buttons slot="primary">
         <ion-button (click)="presentTicketPopover($event)" color="secondary">
           <ion-icon slot="icon-only" name="more"></ion-icon>
         </ion-button>
-      </ion-buttons>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -16,11 +19,11 @@
   </ion-refresher>
   <!-- <ion-button href="tabs/(home:edit)">Next</ion-button>
   <ion-button [routerLink]="['../edit']" routerLinkActive="router-link-active" >Next Routerlink</ion-button> -->
-  <ion-card (dblclick)="presentActionSheet(ticket.Id)" *ngFor="let ticket of currentTickets">
+  <ion-card (dblclick)="presentActionSheet(ticket.id)" *ngFor="let ticket of filteredTickets">
       <ion-item>
           <ion-icon name="hammer" slot="start"></ion-icon>
           <ion-label>{{ticket.Title}}</ion-label>
-          <ion-button (click)="presentActionSheet(ticket.Id)" fill="outline" slot="end">View</ion-button>
+          <ion-button (click)="presentActionSheet(ticket.id)" fill="outline" slot="end">View</ion-button>
         </ion-item>
     <ion-card-content>
       <ion-icon class="card-body-icon" name="warning"></ion-icon>

@@ -1,3 +1,4 @@
+import { PictureListComponent } from './../home/picture-list/picture-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -26,6 +27,11 @@ const routes: Routes = [
         path: 'edit/:id',
         outlet: 'home',
         component: TicketEditorComponent
+      },
+      {
+        path: 'edit/:id/pics',
+        outlet: 'home',
+        component: PictureListComponent
       },
       {
         path: 'about',

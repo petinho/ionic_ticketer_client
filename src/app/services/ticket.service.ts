@@ -1,7 +1,8 @@
 import { Ticket } from './../models/ticket';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+const cudOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,16 @@ import { HttpClient } from '@angular/common/http';
 export class TicketService {
 
   private apiUrl = 'api/ticket';
+  
   constructor(private http: HttpClient) { }
 
-  getTickets(){
+  getTickets() {
     return this.http.get<Ticket[]>(this.apiUrl);
+  }
+  getTicket(id: number) {
+    return this.http.get<Ticket>(this.apiUrl + '/' + id);
+  }
+  saveTicket(ticket: Ticket){
+    return this.http.put(this.apiUrl, ticket);
   }
 }

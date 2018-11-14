@@ -1,3 +1,31 @@
-<p>
-  ticket-editor works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit ticket</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  padding> 
+  <form [formGroup]="ticketForm" (ngSubmit)="saveChanges()">
+      <ion-item>
+        <ion-label><ion-icon name="time"></ion-icon> Drive time</ion-label>
+        <ion-input type="number" formControlName="DriveHours"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label><ion-icon name="time"></ion-icon> Work time</ion-label>
+        <ion-input type="number" formControlName="WorkHours"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label><ion-icon name="hammer"></ion-icon> Done work</ion-label>
+        <ion-textarea type="text" formControlName="WorkDone"></ion-textarea>
+      </ion-item>
+    </form> 
+    <ion-item-divider>
+      <ion-label><ion-icon name="images"></ion-icon> Pictures</ion-label>
+        <ion-button (click)="showTicketPictures()" color="primary" fill="outline">
+          <ion-icon slot="icon-only" name="eye"></ion-icon>
+        </ion-button>
+    </ion-item-divider>
+</ion-content>

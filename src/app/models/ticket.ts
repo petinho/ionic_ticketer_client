@@ -1,5 +1,5 @@
 export class Ticket{
-    Id:number;
+    id:number;
     Title:string;
     CreationDate: Date;
     DueDate: Date;

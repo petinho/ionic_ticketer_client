@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pictures</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <ion-fab vertical="top" horizontal="end">
+        <ion-fab-button>Add</ion-fab-button>
+      
+        <ion-fab-list side="bottom">
+          <ion-fab-button (click)="takeLivePicture()"><ion-icon name="camera"></ion-icon></ion-fab-button>
+          <ion-fab-button (click)="selectPicture()"><ion-icon name="folder"></ion-icon></ion-fab-button>
+        </ion-fab-list>
+      
+      </ion-fab>
+      <ion-list>
+          <ion-item *ngFor="let img of images; index as pos" text-wrap>
+            <ion-thumbnail slot="start">
+              <ion-img [src]="img.path"></ion-img>
+            </ion-thumbnail>
+            <ion-label>
+              {{ img.name }}
+            </ion-label>
+            <ion-button slot="end" fill="clear" (click)="startUpload(img)">
+              <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+            </ion-button>
+            <ion-button slot="end" fill="clear" (click)="deleteImage(img, pos)">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-list>
+
+</ion-content>
